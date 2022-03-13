@@ -43,7 +43,7 @@ client.on('messageCreate', (message) => {
 	if (message.author === client.user) return
 	if (!message.content.startsWith(PREFIX)) return
 
-	const command = message.content.split(' ')[0].replace('.', '').toLowerCase()
+	const command = message.content.split(' ')[0].replace(PREFIX, '').toLowerCase()
 	const func = require(`./text-commands/${command}`)
 
 	try {
