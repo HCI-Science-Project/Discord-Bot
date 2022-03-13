@@ -3,3 +3,6 @@
 
 # remove node modules folders
 node_modules/
+
+# remove compiled JavaScipt files
+**/src/*.js
