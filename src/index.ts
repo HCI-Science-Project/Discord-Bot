@@ -26,7 +26,9 @@ client.once('ready', () => {
 			commands
 				?.create(command.data.toJSON())
 				.catch((error) =>
-					console.log('[SLASH COMMANDS]: An error occured loading a command')
+					console.log(
+						'[SLASH COMMANDS]: An error occured loading a command'
+					)
 				)
 				.then(() =>
 					console.log(
