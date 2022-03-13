@@ -1,12 +1,12 @@
-## Discord Bot
+# Discord Bot
 
-### Overview
+## Overview
 
-This is a Discord Bot created by Hwa Chong students in TypeScript to aid in student's learning of science concepts. With a ;wide range of commands to run, this bot can do things from posting MCQ questions to suggesting notes and resources.
+This is a Discord Bot created by Hwa Chong students in TypeScript to aid in student's learning of science concepts. With a wide range of commands to run, this bot can do things from posting MCQ questions to suggesting notes and resources.
 
-### Commands
+## Commands
 
-### Files
+## Files
 
 This repository has the following files:
 
@@ -14,6 +14,10 @@ This repository has the following files:
 - LICENSE, a copy of the MIT license
 - src, containing the source code for the bot
 
-### Running the bot
+## Running the bot
 
-Ensure your node version >= v16.6.0. Ensure that you have the correct node packages installed. Create a .env file in root folder and insert `TOKEN=<your_token>` and `PREFIX=<your_prefix>`. It should run now.
+Ensure:
+
+- `node`: >= v16.6.0
+- you have the correct `node` packages installed.
+- you have created an `.env` file in the root folder and inserted `TOKEN=<your_token>` and `PREFIX=<your_prefix>`.
