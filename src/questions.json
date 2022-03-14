@@ -1,0 +1,13 @@
+{
+	"category": "Sample Category",
+	"level": 0,
+	"question": "Sample Question",
+	"options": {
+		"A": "the answer"
+		"B": "not the answer"
+		"C": "not the answer"
+		"D": "not the answer"
+	},
+	"answer": options[A]
+	"explanation": "A is quite literally the answer"
+}
