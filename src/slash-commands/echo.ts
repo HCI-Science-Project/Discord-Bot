@@ -13,7 +13,7 @@ export const data = new SlashCommandBuilder()
 
 export async function execute(interaction: CommandInteraction) {
 	await interaction.reply({
-		content: `you entered: '${interaction.options.getString('input')}'`,
+		content: `you entered: "${interaction.options.getString('input')}"`,
 		ephemeral: false,
 	});
 }
