@@ -8,6 +8,6 @@
 		"C": "not the answer"
 		"D": "not the answer"
 	},
-	"answer": options[A]
+	"answer": "A"
 	"explanation": "A is quite literally the answer"
 }
