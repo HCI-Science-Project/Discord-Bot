@@ -23,5 +23,8 @@
 	"bugs": {
 		"url": "https://github.com/HCI-Science-Project/Discord-Bot/issues"
 	},
-	"homepage": "https://github.com/HCI-Science-Project/Discord-Bot#readme"
+	"homepage": "https://github.com/HCI-Science-Project/Discord-Bot#readme",
+	"devDependencies": {
+		"typescript": "^4.6.2"
+	}
 }

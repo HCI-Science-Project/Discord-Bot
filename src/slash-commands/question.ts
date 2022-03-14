@@ -10,28 +10,28 @@ export const data = new SlashCommandBuilder()
         .setCustomId('A')
         .setLabel('')
         .setStyle('PRIMARY')
-        .setEmoji('regional_indicator_a');
+        .setEmoji('regional_indicator_a')
     new MessageButton()
         .setCustomId('B')
         .setLabel('')
         .setStyle('PRIMARY')
-        .setEmoji('regional_indicator_b');
+        .setEmoji('regional_indicator_b')
     new MessageButton()
         .setCustomId('C')
         .setLabel('')
         .setStyle('PRIMARY')
-        .setEmoji('regional_indicator_c');
+        .setEmoji('regional_indicator_c')
     new MessageButton()
         .setCustomId('D')
         .setLabel('')
         .setStyle('PRIMARY')
-        .setEmoji('regional_indicator_d');
-
+        .setEmoji('regional_indicator_d')
+    );
 export async function execute(interaction: CommandInteraction) {
     const randint = Math.floor(Math.random()*Object.keys(obj).length)
     const randqn = obj[Object.keys(obj)[randint]]
     await interaction.reply({
-	      const exampleEmbed = new MessageEmbed()
+	      const question = new MessageEmbed()
             .setColor('#ff0000')
             .setTitle('Question')
             .addFields(
@@ -43,23 +43,23 @@ export async function execute(interaction: CommandInteraction) {
                 C) ${randqn[options][C]},
                 D) ${randqn[options][D]},
                 ```, inline: true},
-                }
+                
             )
     })
     await interaction.reply({
-        if (!interaction.isButton()) return
-        const exampleEmbed = new MessageEmbed()
+        if (interaction.isButton()), return;
+        const result = new MessageEmbed()
         .setColor('#ff0000')
         .setTitle('Question')
         
         if (interaction.customId === randqn[answer]) {
             .addFields(
-                {name: "Good job!", value, "You got it right!"}
+                {name: "Good job!", value: "You got it right!"}
             )
         } else {
             .addFields(
-                {name: "Oops!", value, "Try again next time!"}
+                {name: "Oops!", value: "Try again next time!"}
             )
         }
-    }
+    })
 }
