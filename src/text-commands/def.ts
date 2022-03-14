@@ -12,7 +12,7 @@ export async function execute(message: Message) {
 	// If a definition exists, print it, otherwise give a notice.
 	await message.reply(
 		def !== undefined
-			? `**${input.toUpperCase()}**\n${defs[input]}`
-			: "Sorry, we don't have an entry for the term yet. Check back later!"
+			? `**${input.toUpperCase()}**\n${def}`
+			: "Sorry, we don't have an entry for the term yet. Come back later!"
 	);
 }
