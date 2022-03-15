@@ -6,25 +6,25 @@ export const data = new SlashCommandBuilder()
     .setName('question')
     .setDescription('Gives you a question and lets you answer!')
     .addComponents(
-    new MessageButton()
-        .setCustomId('A')
-        .setLabel('')
-        .setStyle('PRIMARY')
-        .setEmoji('regional_indicator_a')
-    new MessageButton()
-        .setCustomId('B')
-        .setLabel('')
-        .setStyle('PRIMARY')
-        .setEmoji('regional_indicator_b')
-    new MessageButton()
-        .setCustomId('C')
-        .setLabel('')
-        .setStyle('PRIMARY')
-        .setEmoji('regional_indicator_c')
-    new MessageButton()
-        .setCustomId('D')
-        .setLabel('')
-        .setStyle('PRIMARY')
+    new MessageButton(),
+        .setCustomId('A'),
+        .setLabel(''),
+        .setStyle('PRIMARY'),
+        .setEmoji('regional_indicator_a'),
+    new MessageButton(),
+        .setCustomId('B'),
+        .setLabel(''),
+        .setStyle('PRIMARY'),
+        .setEmoji('regional_indicator_b'),
+    new MessageButton(),
+        .setCustomId('C'),
+        .setLabel(''),
+        .setStyle('PRIMARY'),
+        .setEmoji('regional_indicator_c'),
+    new MessageButton(),
+        .setCustomId('D'),
+        .setLabel(''),
+        .setStyle('PRIMARY'),
         .setEmoji('regional_indicator_d')
     );
 export async function execute(interaction: CommandInteraction) {
@@ -38,11 +38,10 @@ export async function execute(interaction: CommandInteraction) {
                 {name: "Question", value: randqn[question]},
                 {name: "Category", value: randqn[category], inline: true},
                 {name: "Level", value: randqn[level], inline: true},
-                {name: 'Options', value: ```A) ${randqn[options][A]},
-                B) ${randqn[options][B]},
-                C) ${randqn[options][C]},
-                D) ${randqn[options][D]},
-                ```, inline: true},
+                {name: 'Options', value: `A) ${randqn[options][A]}
+                B) ${randqn[options][B]}
+                C) ${randqn[options][C]}
+                D) ${randqn[options][D]}`, inline: true},
                 
             )
     })
