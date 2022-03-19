@@ -22,7 +22,7 @@ client.on('ready', () => {
 	const commands = client.guilds.cache.get('952100696587640842').commands;
 
 	const commandFiles = readdirSync('./src/slash-commands').filter((file) =>
-		file.endsWith(!development ? '.ts' : '.js'),
+		file.endsWith(development ? '.ts' : '.js'),
 	);
 
 	for (const file of commandFiles) {
