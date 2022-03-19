@@ -3,6 +3,7 @@ import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction } from 'discord.js';
 
 // Parse the data from the JSON file.
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 export const defs = JSON.parse(JSON.stringify(require('../definitions.json')));
 
 // Build the /def slash command.

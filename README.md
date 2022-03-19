@@ -27,11 +27,13 @@ Ensure:
 Ensure the above.
 
 Run the following:
+
 ```sh
 npm run dev
 ```
 
-Lint (ESLint): 
+Lint (ESLint):
+
 ```sh
 npm run lint
 # or
@@ -39,14 +41,17 @@ npm run lint -- --fix # to fix linting errors
 ```
 
 Formatting (Prettier)
+
 ```sh
 npm run format
 ```
 
 ### Running for production
+
 Ensure the above.
 
 Run the following:
+
 ```sh
 npm run build && npm run start
 ```

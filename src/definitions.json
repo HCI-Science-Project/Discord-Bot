@@ -1,22 +1,62 @@
-{
-	"proton": "A subatomic particle with a relative charge of 1+., found in the nucleus of an atom. Its relative mass is 1.",
-	"neutron": "A subatomic particle with a relative charge of 0, found in the nucleus of an atom. Its relative mass is 1.",
-	"electron": "A subatomic particle with a relative charge of 1-, found orbiting the nuclei of atoms in what is known as electron shells. Its relative mass is 1/2000.",
-	"element": "A substance containing only atoms or molecules of an element.",
-	"compound": "A substance containing molecules/formula units each made of more than one element.",
-	"mixture": "A substance containing more than one element or compound not chemically bonded together.",
-	"formula unit": "A particle made up of ions found within a lattice structure of ions, which make up the lowest number of ions of charges totalling to 0.",
-	"ion": "A particle made up of protons, neutrons and electrons, containing different numbers of protons and electrons, and therefore is either positively (*cation*) or negatively (*anion*) charged.",
-	"atom": "A particle made up of protons, neutrons and electrons, containing the same number of protons as electrons, and therefore is electrically-neutral.",
-	"group": "Represented by a vertical column in the Periodic Table, the group number (written in Roman numerals) of an element refers to the number of valence electrons it has.",
-	"valence electron": "Electrons found on the outermost electron shell of an atom/ion",
-	"electron shell": "The orbits of electrons at varying distances from the nucleus of an atom.",
-	"nucleus": "1. An organelle found in cells which controls and directs all chemical reactions and activities in the cell, including DNA replication, and protein and enzyme synthesis.\n2. The centre of an atom, which contains its protons and neutrons.",
-	"atomic mass": "The total relative masses of all protons and neutrons in a single atom of an element.",
-	"relative atomic mass": "The total relative masses of all protons and neutrons in a single atom of an element.",
-	"relative mass": "The total relative masses of all protons and neutrons in a single atom of an element.",
-	"mass number": "The total relative masses of all protons and neutrons in a single atom of an element.",
-	"atomic number": "The number of protons a single atom of an element has.",
-	"proton number": "The number of protons a single atom of an element has.",
-	"nucleon number": "The total number of protons and neutrons a single atom of an element has."
-}
+[
+	{
+		"proton": "A subatomic particle with a relative charge of 1+., found in the nucleus of an atom. Its relative mass is 1."
+	},
+	{
+		"neutron": "A subatomic particle with a relative charge of 0, found in the nucleus of an atom. Its relative mass is 1."
+	},
+	{
+		"electron": "A subatomic particle with a relative charge of 1-, found orbiting the nuclei of atoms in what is known as electron shells. Its relative mass is 1/2000."
+	},
+	{
+		"element": "A substance containing only atoms or molecules of an element."
+	},
+	{
+		"compound": "A substance containing molecules/formula units each made of more than one element."
+	},
+	{
+		"mixture": "A substance containing more than one element or compound not chemically bonded together."
+	},
+	{
+		"formula unit": "A particle made up of ions found within a lattice structure of ions, which make up the lowest number of ions of charges totalling to 0."
+	},
+	{
+		"ion": "A particle made up of protons, neutrons and electrons, containing different numbers of protons and electrons, and therefore is either positively (*cation*) or negatively (*anion*) charged."
+	},
+	{
+		"atom": "A particle made up of protons, neutrons and electrons, containing the same number of protons as electrons, and therefore is electrically-neutral."
+	},
+	{
+		"group": "Represented by a vertical column in the Periodic Table, the group number (written in Roman numerals) of an element refers to the number of valence electrons it has."
+	},
+	{
+		"valence electron": "Electrons found on the outermost electron shell of an atom/ion"
+	},
+	{
+		"electron shell": "The orbits of electrons at varying distances from the nucleus of an atom."
+	},
+	{
+		"nucleus": "1. An organelle found in cells which controls and directs all chemical reactions and activities in the cell, including DNA replication, and protein and enzyme synthesis.\n2. The centre of an atom, which contains its protons and neutrons."
+	},
+	{
+		"atomic mass": "The total relative masses of all protons and neutrons in a single atom of an element."
+	},
+	{
+		"relative atomic mass": "The total relative masses of all protons and neutrons in a single atom of an element."
+	},
+	{
+		"relative mass": "The total relative masses of all protons and neutrons in a single atom of an element."
+	},
+	{
+		"mass number": "The total relative masses of all protons and neutrons in a single atom of an element."
+	},
+	{
+		"atomic number": "The number of protons a single atom of an element has."
+	},
+	{
+		"proton number": "The number of protons a single atom of an element has."
+	},
+	{
+		"nucleon number": "The total number of protons and neutrons a single atom of an element has."
+	}
+]

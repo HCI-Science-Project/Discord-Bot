@@ -38,7 +38,10 @@ client.on('ready', () => {
 				)
 				.catch((error) =>
 					console.log(
-						'[SLASH COMMANDS]: Error loading ' + command.data.name + ': ' + error,
+						'[SLASH COMMANDS]: Error loading ' +
+							command.data.name +
+							': ' +
+							error,
 					),
 				);
 		}
@@ -61,7 +64,9 @@ client.on('messageCreate', (message) => {
 		console.log(
 			'[TEXT COMMAND] Error executing command, or command doesn\'t exist',
 		);
-		message.reply(`Error executing \`${command}\`, or \`${command}\` doesn't exist`);
+		message.reply(
+			`Error executing \`${command}\`, or \`${command}\` doesn't exist`,
+		);
 	}
 });
 
