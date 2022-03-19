@@ -13,7 +13,7 @@ export const data = new SlashCommandBuilder()
 		option
 			.setName('input')
 			.setDescription('The term you want to receive the definition of')
-			.setRequired(true)
+			.setRequired(true),
 	);
 
 // Reply to the user with the definition, if there is one.
@@ -24,7 +24,7 @@ export async function execute(interaction: CommandInteraction) {
 		content:
 			def !== undefined
 				? `**${input.toUpperCase()}**\n${def}`
-				: "Sorry, we don't have an entry for the term yet. Come back later!",
+				: 'Sorry, we don\'t have an entry for the term yet. Come back later!',
 		ephemeral: false,
 	});
 }
