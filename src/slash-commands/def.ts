@@ -1,10 +1,15 @@
 // Import the builders for slash commands and the interactions.
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction } from 'discord.js';
+import Fuse from 'fuse.js';
 
 // Parse the data from the JSON file.
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-export const defs = JSON.parse(JSON.stringify(require('../definitions.json')));
+import defs from '../definitions.json';
+
+const fuse = new Fuse(defs, {
+	keys: ['item'],
+});
+
 
 // Build the /def slash command.
 export const data = new SlashCommandBuilder()
@@ -20,11 +25,11 @@ export const data = new SlashCommandBuilder()
 // Reply to the user with the definition, if there is one.
 export async function execute(interaction: CommandInteraction) {
 	const input = interaction.options.getString('input').toLowerCase();
-	const def = defs[input];
+	const def = fuse.search(input)[0]?.item;
 	await interaction.reply({
 		content:
 			def !== undefined
-				? `**${input.toUpperCase()}**\n${def}`
+				? `**${def?.item?.toUpperCase()}**\n${def?.definition}`
 				: 'Sorry, we don\'t have an entry for the term yet. Come back later!',
 		ephemeral: false,
 	});
