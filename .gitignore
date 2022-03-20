@@ -7,3 +7,5 @@ node_modules/
 # remove compiled JavaScipt files
 src/*.js
 src/**/*.js
+
+!src/utils/*.js
