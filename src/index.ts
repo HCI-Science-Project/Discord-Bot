@@ -1,23 +1,25 @@
 import { Client, Intents } from 'discord.js';
 import { readdirSync } from 'fs';
-import * as dotenv from 'dotenv';
+import 'dotenv/config';
 import console from 'consola';
 
-const result = dotenv.config();
+process.on('unhandledRejection', console.error);
 const development = process.env.NODE_ENV === 'development';
 
-if (result.error) throw result.error;
+const TOKEN = process.env.TOKEN;
 
-const TOKEN = result.parsed.TOKEN;
+const PREFIX = process.env.PREFIX;
 
-const PREFIX = result.parsed.PREFIX;
-
-export const client = new Client({
+const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 
 client.on('ready', () => {
 	console.success(`[CLIENT] Logged in to Discord as ${client.user.tag}`);
+
+	client.user.setUsername('HCI Science Bot');
+	client.user.setActivity('You', { type: 'WATCHING' });
+	client.user.setStatus('idle');
 
 	// Register commands into discord
 	const commands = client.guilds.cache.get('952100696587640842').commands;
@@ -85,3 +87,4 @@ client.on('interactionCreate', (interaction) => {
 });
 
 client.login(TOKEN);
+
