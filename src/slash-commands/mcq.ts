@@ -1,13 +1,13 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { CommandInteraction, Message, Client, MessageActionRow, MessageButton } from 'discord.js';
+import { CommandInteraction, MessageActionRow, MessageButton } from 'discord.js';
 
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+// const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const data = new SlashCommandBuilder()
 	.setName('mcq')
 	.setDescription('Gives a random MCQ question.');
 
-export async function execute(interaction: CommandInteraction, client: Client) {
+export async function execute(interaction: CommandInteraction) {
 	const questions = [
 		{
 			'category': 'Life Process',
