@@ -1,22 +1,25 @@
 import { Client, Intents } from 'discord.js';
 import { readdirSync } from 'fs';
-import * as dotenv from 'dotenv';
+import 'dotenv/config';
+import console from 'consola';
 
-const result = dotenv.config();
+process.on('unhandledRejection', console.error);
 const development = process.env.NODE_ENV === 'development';
 
-if (result.error) throw result.error;
+const TOKEN = process.env.TOKEN;
 
-const TOKEN = result.parsed.TOKEN;
+const PREFIX = process.env.PREFIX;
 
-const PREFIX = result.parsed.PREFIX;
-
-export const client = new Client({
+const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 
 client.on('ready', () => {
-	console.log(`[CLIENT] Logged in to Discord as ${client.user.tag}`);
+	console.success(`[CLIENT] Logged in to Discord as ${client.user.tag}`);
+
+	client.user.setUsername('HCI Science Bot');
+	client.user.setActivity('You', { type: 'WATCHING' });
+	client.user.setStatus('idle');
 
 	// Register commands into discord
 	const commands = client.guilds.cache.get('952100696587640842').commands;
@@ -32,12 +35,12 @@ client.on('ready', () => {
 			commands
 				?.create(command.data.toJSON())
 				.then(() =>
-					console.log(
+					console.success(
 						`[SLASH COMMANDS]: Successfully loaded command "${command.data.name}"`,
 					),
 				)
 				.catch((error) =>
-					console.log(
+					console.error(
 						'[SLASH COMMANDS]: Error loading ' +
 							command.data.name +
 							': ' +
@@ -60,12 +63,12 @@ client.on('messageCreate', (message) => {
 		const func = require(`./text-commands/${command}`);
 		func.execute(message, args, client);
 	}
-	catch {
-		console.log(
-			'[TEXT COMMAND] Error executing command, or command doesn\'t exist',
+	catch (error) {
+		console.error(
+			'[TEXT COMMAND] Error executing command, or command doesn\'t exist: ' + error,
 		);
 		message.reply(
-			`Error executing \`${command}\`, or \`${command}\` doesn't exist`,
+			`Error executing \`${command}\`, or \`${command}\` doesn't exist.`,
 		);
 	}
 });
@@ -78,9 +81,10 @@ client.on('interactionCreate', (interaction) => {
 	try {
 		func.execute(interaction, client);
 	}
-	catch {
-		console.log('[SLASH COMMANDS]: An error occured running a command');
+	catch (error) {
+		console.error('[SLASH COMMANDS]: An error occured running a command: ' + error);
 	}
 });
 
 client.login(TOKEN);
+

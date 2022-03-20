@@ -1,13 +1,13 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { CommandInteraction, Message, Client, MessageActionRow, MessageButton } from 'discord.js';
+import { CommandInteraction, MessageActionRow, MessageButton } from 'discord.js';
 
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+// const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const data = new SlashCommandBuilder()
 	.setName('mcq')
 	.setDescription('Gives a random MCQ question.');
 
-export async function execute(interaction: CommandInteraction, client: Client) {
+export async function execute(interaction: CommandInteraction) {
 	const questions = [
 		{
 			'category': 'Life Process',
@@ -57,17 +57,18 @@ export async function execute(interaction: CommandInteraction, client: Client) {
 	], components: [options], ephemeral: false, fetchReply: true });
 
 
-	setTimeout(() => {
-		collector.stop('Timeout');
+	const timer = setTimeout(() => {
 		for (let index = 0; index < options.components.length; index++) {
 			options.components[index].setDisabled(true);
 		}
 		interactionMessage.edit({ embeds: [
 			{
+				color: 16711680,
 				title: 'L BOZO',
 				description: 'You failed to answer in time boomer',
 			},
 		], components: [options], ephemeral: false, fetchReply: true });
+		collector.stop('Timeout');
 	}, 15000);
 
 
@@ -76,6 +77,7 @@ export async function execute(interaction: CommandInteraction, client: Client) {
 
 			i.update({ embeds: [
 				{
+					color: 65280,
 					title: qn[i.customId] + ' is correct!',
 					description: qn.explanation,
 				},
@@ -86,6 +88,7 @@ export async function execute(interaction: CommandInteraction, client: Client) {
 
 			i.update({ embeds: [
 				{
+					color: 16711680,
 					title: qn[i.customId] + ' is incorrect!',
 					description: qn.explanation,
 				},
@@ -94,5 +97,6 @@ export async function execute(interaction: CommandInteraction, client: Client) {
 		}
 
 		collector.stop('Option was chosen');
+		clearTimeout(timer);
 	});
 }
