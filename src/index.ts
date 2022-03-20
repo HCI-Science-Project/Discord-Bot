@@ -1,6 +1,7 @@
 import { Client, Intents } from 'discord.js';
 import { readdirSync } from 'fs';
 import * as dotenv from 'dotenv';
+import console from 'consola';
 
 const result = dotenv.config();
 const development = process.env.NODE_ENV === 'development';
@@ -16,7 +17,7 @@ export const client = new Client({
 });
 
 client.on('ready', () => {
-	console.log(`[CLIENT] Logged in to Discord as ${client.user.tag}`);
+	console.success(`[CLIENT] Logged in to Discord as ${client.user.tag}`);
 
 	// Register commands into discord
 	const commands = client.guilds.cache.get('952100696587640842').commands;
@@ -32,12 +33,12 @@ client.on('ready', () => {
 			commands
 				?.create(command.data.toJSON())
 				.then(() =>
-					console.log(
+					console.success(
 						`[SLASH COMMANDS]: Successfully loaded command "${command.data.name}"`,
 					),
 				)
 				.catch((error) =>
-					console.log(
+					console.error(
 						'[SLASH COMMANDS]: Error loading ' +
 							command.data.name +
 							': ' +
@@ -60,12 +61,12 @@ client.on('messageCreate', (message) => {
 		const func = require(`./text-commands/${command}`);
 		func.execute(message, args, client);
 	}
-	catch {
-		console.log(
-			'[TEXT COMMAND] Error executing command, or command doesn\'t exist',
+	catch (error) {
+		console.error(
+			'[TEXT COMMAND] Error executing command, or command doesn\'t exist: ' + error,
 		);
 		message.reply(
-			`Error executing \`${command}\`, or \`${command}\` doesn't exist`,
+			`Error executing \`${command}\`, or \`${command}\` doesn't exist.`,
 		);
 	}
 });
@@ -78,8 +79,8 @@ client.on('interactionCreate', (interaction) => {
 	try {
 		func.execute(interaction, client);
 	}
-	catch {
-		console.log('[SLASH COMMANDS]: An error occured running a command');
+	catch (error) {
+		console.error('[SLASH COMMANDS]: An error occured running a command: ' + error);
 	}
 });
 
