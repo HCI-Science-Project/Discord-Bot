@@ -7,7 +7,7 @@ import Fuse from 'fuse.js';
 import defs from '../definitions.json';
 
 const fuse = new Fuse(defs, {
-	keys: ['item'],
+	keys: ['item', 'aliases'],
 });
 
 export async function execute(message: Message, args: string[]) {

@@ -58,7 +58,7 @@ client.on('messageCreate', (message) => {
 	try {
 		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		const func = require(`./text-commands/${command}`);
-		func.execute(message, args);
+		func.execute(message, args, client);
 	}
 	catch {
 		console.log(
@@ -76,7 +76,7 @@ client.on('interactionCreate', (interaction) => {
 	// eslint-disable-next-line @typescript-eslint/no-var-requires
 	const func = require(`./slash-commands/${interaction.commandName}`);
 	try {
-		func.execute(interaction);
+		func.execute(interaction, client);
 	}
 	catch {
 		console.log('[SLASH COMMANDS]: An error occured running a command');

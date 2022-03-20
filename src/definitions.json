@@ -78,5 +78,10 @@
 	{
 		"item": "nucleon number",
 		"definition": "The total number of protons and neutrons a single atom of an element has."
+	},
+	{
+		"item": "adenosine triphosphate",
+		"definition": "A compound containing the amino acid adenosine and the phosphate group triphosphate.",
+		"aliases": ["atp"]
 	}
 ]
