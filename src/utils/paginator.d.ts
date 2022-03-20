@@ -14,12 +14,14 @@ declare class Paginator {
      * Starts the paginator.
      * @param {object} options
      * @param {CommandInteraction} options.interaction
-     * @param {number=} options.time
+     * @param {number} [options.pagenum=0]
+     * @param {number} [options.time=30000]
      * @returns {Promise<Message>}
      */
-	start({ interaction, time }: {
+	start({ interaction, pagenum, time }: {
         interaction: CommandInteraction;
-        time?: number | undefined;
+        pagenum?: number;
+        time?: number;
     }): Promise<Message>;
     /**
      * Listener for when a button is clicked.

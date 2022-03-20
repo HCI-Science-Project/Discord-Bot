@@ -54,12 +54,13 @@ class Paginator {
 	 * Starts the paginator.
 	 * @param {object} options
 	 * @param {CommandInteraction} options.interaction
-	 * @param {number=} options.time
+	 * @param {number} [options.pagenum=0]
+	 * @param {number} [options.time=30000]
 	 * @returns {Promise<Message>}
 	 */
-	async start({ interaction, time = 30000 }) {
+	async start({ interaction, pagenum = 0, time = 30000 }) {
 		const message = await interaction.reply({
-			...this.getPage(0),
+			...this.getPage(pagenum),
 			fetchReply: true,
 		});
 
@@ -131,10 +132,25 @@ class Paginator {
 	 */
 	getPage(number) {
 		this.currentPage = number;
+		let data;
+		if (number <= this.data.length) {
+			data = this.data[number];
+		}
+		else {
+			data = {
+				embeds: [
+					{
+						title: 'L Bozo',
+						description: 'Nothing exists here :skull:',
+					},
+				],
+			};
+		}
+
 		this.row.components
 			.find((component) => component.customId === 'currentPage')
 			.setLabel(`${number + 1}/${this.data.length}`);
-		return { ...this.data[number], components: [this.row, this.stopRow] };
+		return { ...data, components: [this.row, this.stopRow] };
 	}
 }
 
