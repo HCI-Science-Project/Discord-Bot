@@ -49,12 +49,26 @@ export async function execute(interaction: CommandInteraction, client: Client) {
 		time: 15000,
 	});
 
-	interaction.reply({ embeds: [
+	const interactionMessage: any = await interaction.reply({ embeds: [
 		{
 			title: qn.question,
 			description: 'You have 15 seconds to answer this question.',
 		},
-	], components: [options], ephemeral: false });
+	], components: [options], ephemeral: false, fetchReply: true });
+
+
+	setTimeout(() => {
+		collector.stop('Timeout');
+		for (let index = 0; index < options.components.length; index++) {
+			options.components[index].setDisabled(true);
+		}
+		interactionMessage.edit({ embeds: [
+			{
+				title: 'L BOZO',
+				description: 'You failed to answer in time boomer',
+			},
+		], components: [options], ephemeral: false, fetchReply: true });
+	}, 15000);
 
 
 	collector.on('collect', (i) => {
@@ -62,7 +76,7 @@ export async function execute(interaction: CommandInteraction, client: Client) {
 
 			i.update({ embeds: [
 				{
-					title: qn['option' + qn.answer] + ' is correct!',
+					title: qn[i.customId] + ' is correct!',
 					description: qn.explanation,
 				},
 			], components: [] });
@@ -72,13 +86,13 @@ export async function execute(interaction: CommandInteraction, client: Client) {
 
 			i.update({ embeds: [
 				{
-					title: qn['option' + qn.answer] + ' is incorrect!',
+					title: qn[i.customId] + ' is incorrect!',
 					description: qn.explanation,
 				},
 			], components: [] });
 
 		}
 
-		collector.stop();
+		collector.stop('Option was chosen');
 	});
 }
