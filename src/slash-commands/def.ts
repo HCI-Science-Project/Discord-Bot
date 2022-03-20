@@ -2,7 +2,7 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
 import { CommandInteraction, Client } from 'discord.js';
 import Fuse from 'fuse.js';
-import Paginator from '../utils/paginator';
+import Paginator from '../utils/paginator.js';
 
 // Parse the data from the JSON file.
 import defs from '../definitions.json';
