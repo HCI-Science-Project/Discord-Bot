@@ -1,18 +1,24 @@
 // Import the Message type for text commands.
 import { Message } from 'discord.js';
+import Fuse from 'fuse.js';
 
 // Parse the JSON file.
-export const defs = JSON.parse(JSON.stringify(require('../definitions.json')));
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+import defs from '../definitions.json';
 
-export async function execute(message: Message) {
+const fuse = new Fuse(defs, {
+	keys: ['item', 'aliases'],
+});
+
+export async function execute(message: Message, args: string[]) {
 	// Get the string argument from the command.
-	const input = message.content.split(' ').slice(1).join(' ').toLowerCase();
+	const input = args.join(' ');
 	// Fetch the definition from the JSON table.
-	const def = defs[input];
+	const def = fuse.search(input)[0]?.item;
 	// If a definition exists, print it, otherwise give a notice.
 	await message.reply(
 		def !== undefined
-			? `**${input.toUpperCase()}**\n${def}`
-			: "Sorry, we don't have an entry for the term yet. Come back later!"
+			? `**${def?.item?.toUpperCase()}**\n${def?.definition}`
+			: 'Sorry, we don\'t have an entry for the term yet. Come back later!',
 	);
 }
