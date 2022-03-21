@@ -133,7 +133,7 @@ class Paginator {
 	getPage(number) {
 		this.currentPage = number;
 		let data;
-		if (number <= this.data.length) {
+		if (number <= this.data.length && number > -1) {
 			data = this.data[number];
 		}
 		else {
@@ -141,7 +141,7 @@ class Paginator {
 				embeds: [
 					{
 						title: 'L Bozo',
-						description: 'Nothing exists here :skull:',
+						description: 'Nothing exists here or your search was invalid :skull:',
 					},
 				],
 			};

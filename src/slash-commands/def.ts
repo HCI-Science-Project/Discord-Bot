@@ -25,27 +25,25 @@ export const data = new SlashCommandBuilder()
 
 // Reply to the user with the definition, if there is one.
 export async function execute(interaction: CommandInteraction, client: Client) {
+
+	const defsList = new Paginator(
+		defs.map((e) => ({
+			embeds: [{
+				title: e.item,
+				description: e.definition,
+			}],
+		})),
+	);
+
 	const input = interaction.options.getString('option');
 	if (input && !input?.startsWith('page:')) {
 		const def = fuse.search(input.toLowerCase())[0]?.item;
-		await interaction.reply({
-			content:
-				def !== undefined
-					? `**${def?.item?.toUpperCase()}**\n${def?.definition}`
-					: 'Sorry, we don\'t have an entry for the term yet. Come back later!',
-			ephemeral: false,
-		});
+
+		const pagenum = defs.indexOf(def);
+
+		defsList.start({ interaction, pagenum });
 	}
 	else {
-		const defsList = new Paginator(
-			defs.map((e) => ({
-				embeds: [{
-					title: e.item,
-					description: e.definition,
-				}],
-			})),
-		);
-
 		if (!input?.startsWith('page:')) {
 			defsList.start({ interaction });
 			return;
