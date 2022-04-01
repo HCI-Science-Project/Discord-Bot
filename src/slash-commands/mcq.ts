@@ -49,6 +49,7 @@ export async function execute(interaction: CommandInteraction) {
 		time: 15000,
 	});
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const interactionMessage: any = await interaction.reply({ embeds: [
 		{
 			title: qn.question,

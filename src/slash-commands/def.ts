@@ -24,7 +24,7 @@ export const data = new SlashCommandBuilder()
 	);
 
 // Reply to the user with the definition, if there is one.
-export async function execute(interaction: CommandInteraction, client: Client) {
+export async function execute(interaction: CommandInteraction) {
 
 	const defsList = new Paginator(
 		defs.map((e) => ({

@@ -4,7 +4,7 @@ declare module 'discord.js' {
     [key: string]: any
   }
 }
-import { Client, Intents, Message } from 'discord.js';
+import { Client, Intents } from 'discord.js';
 import { readdirSync } from 'fs';
 import 'dotenv/config';
 import console from 'consola';
