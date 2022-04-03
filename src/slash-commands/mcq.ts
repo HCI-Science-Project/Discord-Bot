@@ -1,14 +1,23 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { CommandInteraction, MessageActionRow, MessageButton } from 'discord.js';
+import { CommandInteraction, MessageActionRow, MessageButton, InteractionCollector } from 'discord.js';
 
 // const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-export const data = new SlashCommandBuilder()
+export const data: SlashCommandBuilder = new SlashCommandBuilder()
 	.setName('mcq')
 	.setDescription('Gives a random MCQ question.');
 
-export async function execute(interaction: CommandInteraction) {
-	const questions = [
+export async function execute(interaction: CommandInteraction): Promise<void> {
+	const questions: {
+		category: string,
+		question: string,
+		option1: string,
+		option2: string,
+		option3: string,
+		option4: string,
+		answer: number,
+		explanation: string,
+	}[] = [
 		{
 			'category': 'Life Process',
 			'question': 'Which of the following are energy foods?',
@@ -24,7 +33,7 @@ export async function execute(interaction: CommandInteraction) {
 
 	const qn = questions[Math.floor(Math.random() * questions.length)];
 
-	const options = new MessageActionRow()
+	const options: MessageActionRow = new MessageActionRow()
 		.addComponents(
 			new MessageButton()
 				.setCustomId('option1')
@@ -44,11 +53,13 @@ export async function execute(interaction: CommandInteraction) {
 				.setStyle('PRIMARY'),
 		);
 
-	const collector = interaction.channel.createMessageComponentCollector({
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const collector: InteractionCollector<any> = interaction.channel.createMessageComponentCollector({
 		filter: (i) => i.user.id === interaction.user.id,
 		time: 15000,
 	});
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const interactionMessage: any = await interaction.reply({ embeds: [
 		{
 			title: qn.question,
@@ -57,7 +68,7 @@ export async function execute(interaction: CommandInteraction) {
 	], components: [options], ephemeral: false, fetchReply: true });
 
 
-	const timer = setTimeout(() => {
+	const timer = setTimeout((): void => {
 		for (let index = 0; index < options.components.length; index++) {
 			options.components[index].setDisabled(true);
 		}
@@ -72,7 +83,7 @@ export async function execute(interaction: CommandInteraction) {
 	}, 15000);
 
 
-	collector.on('collect', (i) => {
+	collector.on('collect', (i): void => {
 		if (i.customId === 'option' + qn.answer) {
 
 			i.update({ embeds: [

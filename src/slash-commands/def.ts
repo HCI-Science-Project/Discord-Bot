@@ -13,39 +13,51 @@ const fuse = new Fuse(defs, {
 
 
 // Build the /def slash command.
-export const data = new SlashCommandBuilder()
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const data: any = new SlashCommandBuilder()
 	.setName('def')
-	.setDescription('Replies with the definition of the term requested!')
+	.setDescription('Replies with the definition of the term requested or shows you a list of terms!')
 	.addStringOption((option) =>
 		option
-			.setName('term')
-			.setDescription('The term you want to receive the definition of')
+			.setName('option')
+			.setDescription('Definition of terms or page no. prefixed by `page:`')
 			.setRequired(false),
 	);
 
 // Reply to the user with the definition, if there is one.
-export async function execute(interaction: CommandInteraction) {
-	const input = interaction.options.getString('term');
-	if (input) {
+export async function execute(interaction: CommandInteraction): Promise<void> {
+
+	const defsList: Paginator = new Paginator(
+		defs.map((e): {
+      embeds: {
+        title: string;
+        description: string;
+      }[]
+    } => ({
+			embeds: [{
+				title: e.item,
+				description: e.definition,
+			}],
+		})),
+	);
+
+	const input = interaction.options.getString('option');
+	if (input && !input?.startsWith('page:')) {
 		const def = fuse.search(input.toLowerCase())[0]?.item;
-		await interaction.reply({
-			content:
-				def !== undefined
-					? `**${def?.item?.toUpperCase()}**\n${def?.definition}`
-					: 'Sorry, we don\'t have an entry for the term yet. Come back later!',
-			ephemeral: false,
-		});
+
+		const pagenum = defs.indexOf(def);
+
+		defsList.start({ interaction, pagenum });
 	}
 	else {
-		const defsList = new Paginator(
-			defs.map((e) => ({
-				embeds: [{
-					title: e.item,
-					description: e.definition,
-				}],
-			})),
-		);
+		if (!input?.startsWith('page:')) {
+			defsList.start({ interaction });
+			return;
+		}
 
-		defsList.start({ interaction });
+		if (input.startsWith('page:')) {
+			const page = parseInt(input.split(':')[1]) - 1;
+			defsList.start({ interaction, pagenum: page });
+		}
 	}
 }

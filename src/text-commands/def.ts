@@ -10,7 +10,7 @@ const fuse = new Fuse(defs, {
 	keys: ['item', 'aliases'],
 });
 
-export async function execute(message: Message, args: string[]) {
+export async function execute(message: Message, args: string[]): Promise<void> {
 	// Get the string argument from the command.
 	const input = args.join(' ');
 	// Fetch the definition from the JSON table.

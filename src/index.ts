@@ -1,20 +1,26 @@
+declare module 'discord.js' {
+  export interface Client {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any
+  }
+}
 import { Client, Intents } from 'discord.js';
 import { readdirSync } from 'fs';
 import 'dotenv/config';
 import console from 'consola';
+import banned from './badWords.json';
 
 process.on('unhandledRejection', console.error);
+
 const development = process.env.NODE_ENV === 'development';
-
 const TOKEN = process.env.TOKEN;
-
 const PREFIX = process.env.PREFIX;
 
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 
-client.on('ready', () => {
+client.on('ready', async (): Promise<void> => {
 	console.success(`[CLIENT] Logged in to Discord as ${client.user.tag}`);
 
 	client.user.setUsername('HCI Science Bot');
@@ -51,9 +57,33 @@ client.on('ready', () => {
 	}
 });
 
-client.on('messageCreate', (message) => {
+/* client.on('messageUpdate', async (message: Message) => {
+	if (Object.keys(banned).some((word) => message.content.toLowerCase().split(' ').includes(word))) {
+		const msg = await message.reply('No swearing!');
+		setTimeout(() => {
+			msg.delete();
+			message.delete();
+		}, 5000);
+	}
+}); */
+
+client.on('messageCreate', async (message): Promise<void> => {
 	if (message.author === client.user) return;
+
+	if (message.content.startsWith('I\'m')) { // totally not sus
+		message.channel.send(`Hi ${message.content.slice(3).trim()}, I'm Dad!`);
+	}
+
+	if (banned.some((word) => message.content.toLowerCase().includes(word))) {
+		const msg = await message.reply('No swearing!');
+		setTimeout(() => {
+			msg.delete();
+			message.delete();
+		}, 5000);
+	}
+
 	if (!message.content.startsWith(PREFIX)) return;
+
 
 	const args = message.content.slice(PREFIX.length).trim().split(/ +/);
 
@@ -73,7 +103,7 @@ client.on('messageCreate', (message) => {
 	}
 });
 
-client.on('interactionCreate', (interaction) => {
+client.on('interactionCreate', async (interaction): Promise<void> => {
 	if (!interaction.isCommand()) return;
 
 	// eslint-disable-next-line @typescript-eslint/no-var-requires
