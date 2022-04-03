@@ -1,6 +1,6 @@
 // Import the builders for slash commands and the interactions.
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { CommandInteraction, Client } from 'discord.js';
+import { CommandInteraction } from 'discord.js';
 import Fuse from 'fuse.js';
 import Paginator from '../utils/paginator.js';
 
@@ -13,7 +13,8 @@ const fuse = new Fuse(defs, {
 
 
 // Build the /def slash command.
-export const data = new SlashCommandBuilder()
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const data: any = new SlashCommandBuilder()
 	.setName('def')
 	.setDescription('Replies with the definition of the term requested or shows you a list of terms!')
 	.addStringOption((option) =>
@@ -24,10 +25,15 @@ export const data = new SlashCommandBuilder()
 	);
 
 // Reply to the user with the definition, if there is one.
-export async function execute(interaction: CommandInteraction) {
+export async function execute(interaction: CommandInteraction): Promise<void> {
 
-	const defsList = new Paginator(
-		defs.map((e) => ({
+	const defsList: Paginator = new Paginator(
+		defs.map((e): {
+      embeds: {
+        title: string;
+        description: string;
+      }[]
+    } => ({
 			embeds: [{
 				title: e.item,
 				description: e.definition,
